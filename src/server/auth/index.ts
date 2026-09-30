@@ -3,10 +3,10 @@ import "server-only";
 import { env } from "@/lib/env";
 import type { User } from "@/types";
 
-import { devAuthProvider } from "./dev-provider";
+import { createDevAuthProvider } from "./dev-provider";
 import type { AuthProvider } from "./types";
 
-export type { AuthProvider } from "./types";
+export type { AuthProvider, SignInOption } from "./types";
 
 export class UnauthenticatedError extends Error {
   constructor() {
@@ -25,12 +25,17 @@ export function createAuth(provider: AuthProvider) {
       if (!user) throw new UnauthenticatedError();
       return user;
     },
+    signInOptions: () => provider.signInOptions(),
+    signIn: (optionId: string) => provider.signIn(optionId),
+    signOut: () => provider.signOut(),
   };
 }
 
 // Register the SSO provider here when it's added, and extend AUTH_PROVIDER in env.ts.
-const providers: Record<typeof env.AUTH_PROVIDER, AuthProvider> = {
-  dev: devAuthProvider,
+const providers: Record<typeof env.AUTH_PROVIDER, () => AuthProvider> = {
+  dev: () => createDevAuthProvider(),
 };
 
-export const { getCurrentUser, requireUser } = createAuth(providers[env.AUTH_PROVIDER]);
+export const { getCurrentUser, requireUser, signInOptions, signIn, signOut } = createAuth(
+  providers[env.AUTH_PROVIDER](),
+);

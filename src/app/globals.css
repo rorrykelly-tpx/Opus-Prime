@@ -1421,3 +1421,20 @@ h3.pillar-h {
   color: var(--muted);
   white-space: nowrap;
 }
+/* sign-in page and header sign-out */
+.signin-options {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  display: grid;
+  gap: 14px;
+}
+.signin-options form {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.signout {
+  display: contents;
+}
