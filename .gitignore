@@ -1,0 +1,27 @@
+# dependencies
+node_modules/
+
+# next.js / build
+.next/
+out/
+build/
+next-env.d.ts
+*.tsbuildinfo
+
+# testing
+coverage/
+
+# env (keep .env.example)
+.env
+.env*.local
+
+# vercel
+.vercel
+
+# misc
+.DS_Store
+*.log
+npm-debug.log*
+
+# claude code local overrides
+.claude/settings.local.json
