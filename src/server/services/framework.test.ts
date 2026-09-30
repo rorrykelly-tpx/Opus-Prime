@@ -1,7 +1,13 @@
 import frameworkJson from "@/data/framework.json";
+import knowledgeJson from "@/data/knowledge.json";
 import resourcesJson from "@/data/resources.json";
 
-import { findFrameworkProblems, frameworkSource, parseFrameworkSource } from "./framework";
+import {
+  findFrameworkProblems,
+  findKnowledgeProblems,
+  frameworkSource,
+  parseFrameworkSource,
+} from "./framework";
 
 const clone = <T>(value: T): T => structuredClone(value);
 
@@ -25,13 +31,13 @@ describe("framework data", () => {
     const raw = clone(frameworkJson);
     const firstSkill = raw.roles[0]!.skills[0]!;
     (firstSkill.expected as Record<string, string | null>)["9"] = "Wizard";
-    expect(() => parseFrameworkSource(raw, resourcesJson)).toThrow();
+    expect(() => parseFrameworkSource(raw, resourcesJson, knowledgeJson)).toThrow();
   });
 
   it("rejects a skill level map with a level missing", () => {
     const raw = clone(frameworkJson);
     delete (raw.skills[0]!.levels as Partial<Record<string, string[]>>).Driver;
-    expect(() => parseFrameworkSource(raw, resourcesJson)).toThrow();
+    expect(() => parseFrameworkSource(raw, resourcesJson, knowledgeJson)).toThrow();
   });
 
   it("reports a role that uses an undefined skill", () => {
@@ -60,6 +66,27 @@ describe("framework data", () => {
   it("rejects resource links that aren't http or https", () => {
     const raw = clone(resourcesJson);
     raw.resources[0]!.url = "javascript:alert(1)";
-    expect(() => parseFrameworkSource(frameworkJson, raw)).toThrow();
+    expect(() => parseFrameworkSource(frameworkJson, raw, knowledgeJson)).toThrow();
+  });
+
+  it("loads the question bank and course catalogue", () => {
+    const { knowledge } = frameworkSource;
+    expect(knowledge.topics).toHaveLength(25);
+    expect(knowledge.topics.every((t) => t.questions.length >= 5)).toBe(true);
+    expect(findKnowledgeProblems(knowledge)).toEqual([]);
+  });
+
+  it("rejects a question whose answer isn't one of its options", () => {
+    const raw = clone(knowledgeJson);
+    raw.topics[0]!.questions[0]!.correct = 9;
+    expect(() => parseFrameworkSource(frameworkJson, resourcesJson, raw)).toThrow();
+  });
+
+  it("reports courses listed for an unknown topic", () => {
+    const knowledge = clone(frameworkSource.knowledge);
+    knowledge.courses.push({ topic: "astrology", courses: [] });
+    expect(findKnowledgeProblems(knowledge)).toContain(
+      'Courses are listed for unknown topic "astrology"',
+    );
   });
 });

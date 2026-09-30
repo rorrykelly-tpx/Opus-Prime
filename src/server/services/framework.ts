@@ -1,82 +1,11 @@
 import "server-only";
 
-import { z } from "zod";
-
 import frameworkJson from "@/data/framework.json";
+import knowledgeJson from "@/data/knowledge.json";
 import resourcesJson from "@/data/resources.json";
-import {
-  BEHAVIOUR_BANDS,
-  CONSULTING_STAGES,
-  GRADES,
-  PROFICIENCY_LEVELS,
-  slugify,
-} from "@/lib/pathways";
-import type { Framework, LearningResource } from "@/types/pathways";
-
-const proficiencyLevel = z.enum(PROFICIENCY_LEVELS);
-const grade = z.enum(GRADES);
-const descriptors = z.array(z.string().min(1));
-
-const frameworkSchema = z.object({
-  version: z.string().min(1),
-  proficiencyLevels: z.array(proficiencyLevel),
-  skills: z.array(
-    z.object({
-      name: z.string().min(1),
-      definition: z.string(),
-      levels: z.record(proficiencyLevel, descriptors),
-    }),
-  ),
-  roles: z.array(
-    z.object({
-      capability: z.string().min(1),
-      practice: z.string().min(1),
-      role: z.string().min(1),
-      grades: z.array(grade).min(1),
-      skills: z.array(
-        z.object({
-          name: z.string().min(1),
-          expected: z.partialRecord(grade, proficiencyLevel.nullable()),
-        }),
-      ),
-    }),
-  ),
-  behaviours: z.array(
-    z.object({
-      name: z.string().min(1),
-      definition: z.string(),
-      bands: z.record(z.enum(BEHAVIOUR_BANDS), descriptors),
-    }),
-  ),
-  impacts: z.array(z.object({ name: z.string().min(1), definition: z.string() })),
-  consultingPillars: z.array(
-    z.object({
-      pillar: z.string().min(1),
-      summary: z.string(),
-      links: z.object({ impact: z.string(), behaviour: z.string() }),
-      modules: z.array(
-        z.object({
-          name: z.string().min(1),
-          stage: z.enum(CONSULTING_STAGES),
-          foundation: z.boolean(),
-        }),
-      ),
-    }),
-  ),
-}) satisfies z.ZodType<Framework>;
-
-const resourcesSchema = z.object({
-  resources: z.array(
-    z.object({
-      id: z.string().min(1),
-      title: z.string().min(1),
-      url: z.url({ protocol: /^https?$/ }),
-      description: z.string(),
-      format: z.enum(["website", "document", "presentation", "book", "course", "article"]),
-      frameworkTags: z.array(z.string()),
-    }),
-  ),
-}) satisfies z.ZodType<{ resources: LearningResource[] }>;
+import { PROFICIENCY_LEVELS, slugify } from "@/lib/pathways/framework";
+import { frameworkSchema, knowledgeSchema, resourcesSchema } from "@/lib/pathways/schemas";
+import type { Framework, KnowledgeCatalogue, LearningResource } from "@/types/pathways";
 
 function findDuplicates(values: string[]): string[] {
   const seen = new Set<string>();
@@ -157,25 +86,47 @@ export function findFrameworkProblems(
   return problems;
 }
 
+/** Checks the question bank and course catalogue refer to each other. */
+export function findKnowledgeProblems(knowledge: KnowledgeCatalogue): string[] {
+  const problems: string[] = [];
+  const topicIds = knowledge.topics.map((t) => t.id);
+  for (const id of findDuplicates(topicIds))
+    problems.push(`More than one topic has the id "${id}"`);
+  for (const { topic } of knowledge.courses) {
+    if (!topicIds.includes(topic)) problems.push(`Courses are listed for unknown topic "${topic}"`);
+  }
+  return problems;
+}
+
 export interface FrameworkSource {
   framework: Framework;
   resources: LearningResource[];
+  knowledge: KnowledgeCatalogue;
 }
 
-/** Validates raw framework and resource data. Throws with every problem found. */
+/** Validates the raw data files. Throws with every problem found. */
 export function parseFrameworkSource(
   rawFramework: unknown,
   rawResources: unknown,
+  rawKnowledge: unknown,
 ): FrameworkSource {
   const framework = frameworkSchema.parse(rawFramework);
   const { resources } = resourcesSchema.parse(rawResources);
-  const problems = findFrameworkProblems(framework, resources);
+  const knowledge = knowledgeSchema.parse(rawKnowledge);
+  const problems = [
+    ...findFrameworkProblems(framework, resources),
+    ...findKnowledgeProblems(knowledge),
+  ];
   if (problems.length > 0) {
     throw new Error(`Invalid framework data:\n- ${problems.join("\n- ")}`);
   }
-  return { framework, resources };
+  return { framework, resources, knowledge };
 }
 
 // Parsed once per server instance. framework.test.ts parses the committed data so CI catches
 // bad data before it's deployed.
-export const frameworkSource: FrameworkSource = parseFrameworkSource(frameworkJson, resourcesJson);
+export const frameworkSource: FrameworkSource = parseFrameworkSource(
+  frameworkJson,
+  resourcesJson,
+  knowledgeJson,
+);

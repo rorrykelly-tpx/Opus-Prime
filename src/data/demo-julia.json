@@ -1,0 +1,329 @@
+{
+  "profile": {
+    "role": "Data Engineer",
+    "grade": "9",
+    "read": {
+      "s:Data development process": true,
+      "s:Data modelling, cleansing and enrichment": true,
+      "s:Data analysis and synthesis": true,
+      "s:Data management": true,
+      "s:Data integration design": true,
+      "s:Testing (data)": true,
+      "b:Owning and delivering": true,
+      "b:Supporting and developing others": true,
+      "b:Developing your craft": true,
+      "c:Intro to client contexts, TPXimpact delivery models and mindsets": true,
+      "c:Operating effectively in client settings": true,
+      "c:Ambassador mindsets and the value loop": true
+    },
+    "quiz": {
+      "s:Data modelling, cleansing and enrichment": {
+        "know": 0.8,
+        "subj": 0.8
+      },
+      "s:Data development process": {
+        "know": 1
+      },
+      "s:Data analysis and synthesis": {
+        "subj": 0.8
+      },
+      "s:Data management": {
+        "know": 0.8,
+        "subj": 1
+      },
+      "b:Owning and delivering": {
+        "know": 0.8
+      },
+      "b:Supporting and developing others": {
+        "know": 1
+      },
+      "s:Testing (data)": {
+        "subj": 0.4
+      },
+      "c:Operating effectively in client settings": {
+        "know": 0.8
+      }
+    },
+    "tracker": "tree",
+    "milestone": 25,
+    "knowledge": {
+      "data-modelling": 0.8,
+      "data-analysis": 0.8,
+      "data-governance": 1,
+      "data-engineering": 0.6,
+      "qa-testing": 0.4,
+      "consulting": 0.6
+    },
+    "shareWith": ["sam.patel@tpximpact.com"],
+    "shareIds": [],
+    "shareNames": {
+      "sam.patel@tpximpact.com": "Sam Patel, line manager"
+    },
+    "plan": {
+      "at": 1789862400000,
+      "intro": "You're solid at Mid and already doing parts of Senior. To get there fully, build depth in testing and engineering, and take the lead in client conversations.",
+      "actions": [
+        {
+          "title": "Own a test strategy for the repairs pipeline",
+          "detail": "Write a short test strategy covering data quality, schema changes and performance, then put it in place with the team. It creates Senior-level evidence for Testing (data).",
+          "area": "Testing (data)"
+        },
+        {
+          "title": "Lead the next options conversation yourself",
+          "detail": "Ask your lead to let you run the next client meeting end to end, including budget trade-offs. Ask for feedback straight afterwards.",
+          "area": "Communicating and collaborating"
+        },
+        {
+          "title": "Take the QA and testing course and quiz",
+          "detail": "Test Automation University's free courses cover the gaps the knowledge quiz found. Retake the subject quiz afterwards.",
+          "area": "QA and testing knowledge"
+        },
+        {
+          "title": "Refactor the ingestion code with a reviewer",
+          "detail": "Pick the messiest ingestion module and refactor it with tests, with a Lead reviewing. It builds Programming and build towards Skilled.",
+          "area": "Programming and build (data engineering)"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "demo-1",
+      "date": "2026-02-12",
+      "title": "Rebuilt the housing repairs data pipeline",
+      "text": "The council's overnight repairs load kept failing and staff didn't trust the dashboard. I rebuilt the pipeline in dbt on the client's warehouse, splitting it into staged models, and set up incremental loads so it finishes in 20 minutes instead of 3 hours. I documented each model so the client team can maintain it.",
+      "summary": "Rebuilt a failing overnight pipeline so it's faster and maintainable by the client.",
+      "files": [],
+      "createdAt": 1770854400000,
+      "tags": {
+        "skills": [
+          {
+            "name": "Data development process",
+            "level": "Contributor",
+            "why": "Designed, built and tested the pipeline from several source feeds."
+          },
+          {
+            "name": "Data integration design",
+            "level": "Contributor",
+            "why": "Delivered the integration to agreed standards."
+          }
+        ],
+        "behaviours": [
+          {
+            "name": "Owning and delivering",
+            "band": "9",
+            "why": "Spotted the reliability problem and fixed it beyond the original ask."
+          }
+        ],
+        "impacts": ["Client delivery"],
+        "consulting": []
+      }
+    },
+    {
+      "id": "demo-2",
+      "date": "2026-03-05",
+      "title": "Designed the dimensional model for the repairs dashboard",
+      "text": "I ran two sessions with the repairs managers to agree what they need to measure, then designed a star schema with a repairs fact table and dimensions for property, trade and date. I used a Type 2 dimension for properties so reports keep history when tenancies change.",
+      "summary": "Designed a star schema with history for the council's repairs reporting.",
+      "files": [],
+      "createdAt": 1772668800000,
+      "tags": {
+        "skills": [
+          {
+            "name": "Data modelling, cleansing and enrichment",
+            "level": "Contributor",
+            "why": "Produced the model and chose appropriate model types."
+          },
+          {
+            "name": "Data analysis and synthesis",
+            "level": "Contributor",
+            "why": "Turned managers' questions into clear measures."
+          }
+        ],
+        "behaviours": [
+          {
+            "name": "Navigating scope and complexity",
+            "band": "8",
+            "why": "Broke an unclear request into smaller parts."
+          }
+        ],
+        "impacts": ["Client delivery"],
+        "consulting": []
+      }
+    },
+    {
+      "id": "demo-3",
+      "date": "2026-04-02",
+      "title": "Added automated data quality tests",
+      "text": "I added dbt tests for nulls, uniqueness and accepted values on the core models. They catch about two issues a week before the dashboard refreshes. I haven't yet set up testing across the whole pipeline or tested performance.",
+      "summary": "Added the first automated data quality checks.",
+      "files": [],
+      "createdAt": 1775088000000,
+      "tags": {
+        "skills": [
+          {
+            "name": "Testing (data)",
+            "level": "Contributor",
+            "why": "Tests key models, but not yet a full test strategy."
+          },
+          {
+            "name": "Programming and build (data engineering)",
+            "level": "Contributor",
+            "why": "Writes and maintains the transformation code with support."
+          }
+        ],
+        "behaviours": [],
+        "impacts": ["Client delivery"],
+        "consulting": []
+      }
+    },
+    {
+      "id": "demo-4",
+      "date": "2026-04-18",
+      "title": "Completed the Data Engineering Zoomcamp",
+      "text": "I completed the nine-week course in my own time: containers, orchestration, batch and streaming. I shared my notes at the data community of practice.",
+      "summary": "Finished an external data engineering course and shared what I learned.",
+      "files": [],
+      "createdAt": 1776470400000,
+      "tags": {
+        "skills": [
+          {
+            "name": "Data engineering and manipulation",
+            "level": "Learner",
+            "why": "Growing awareness of engineering patterns beyond current project."
+          }
+        ],
+        "behaviours": [
+          {
+            "name": "Developing your craft",
+            "band": "8",
+            "why": "Sought out learning and shared it with the practice."
+          }
+        ],
+        "impacts": ["People and practice"],
+        "consulting": []
+      }
+    },
+    {
+      "id": "demo-5",
+      "date": "2026-05-20",
+      "title": "Paired with a junior engineer on SQL and dbt",
+      "text": "For six weeks I paired with Arun, who joined as a junior. We worked through real tickets together and I gradually stepped back. He now picks up modelling tickets on his own.",
+      "summary": "Mentored a junior engineer until they could work independently.",
+      "files": [],
+      "createdAt": 1779235200000,
+      "tags": {
+        "skills": [],
+        "behaviours": [
+          {
+            "name": "Supporting and developing others",
+            "band": "9",
+            "why": "Gave space to deliver and stepped in when needed."
+          }
+        ],
+        "impacts": ["People and practice"],
+        "consulting": ["Collaborative Working"]
+      }
+    },
+    {
+      "id": "demo-6",
+      "date": "2026-06-11",
+      "title": "Presented pipeline options to the client's head of data",
+      "text": "I prepared three options for moving the remaining feeds, with costs and risks, and presented them. My lead handled the hardest questions about budget.",
+      "summary": "Presented technical options to a senior client stakeholder.",
+      "files": [],
+      "createdAt": 1781136000000,
+      "tags": {
+        "skills": [],
+        "behaviours": [
+          {
+            "name": "Communicating and collaborating",
+            "band": "8",
+            "why": "Translated technical options for a senior audience, with support."
+          }
+        ],
+        "impacts": ["Client delivery"],
+        "consulting": ["Client Relationships"]
+      }
+    },
+    {
+      "id": "demo-7",
+      "date": "2026-07-08",
+      "title": "Set up data retention rules with the data protection officer",
+      "text": "Worked with the council's DPO to apply retention periods to repairs data, and added a scheduled job that removes records past their retention date.",
+      "summary": "Put retention rules into practice with the DPO.",
+      "files": [],
+      "createdAt": 1783468800000,
+      "tags": {
+        "skills": [
+          {
+            "name": "Data management",
+            "level": "Contributor",
+            "why": "Applied governance in the team's products."
+          }
+        ],
+        "behaviours": [],
+        "impacts": ["Client delivery"],
+        "consulting": []
+      }
+    },
+    {
+      "id": "demo-8",
+      "date": "2026-08-14",
+      "title": "Wrote the data section of an NHS trust bid",
+      "text": "I wrote the data platform section and the case study from the council work for a bid to an NHS trust.",
+      "summary": "Contributed to a bid with specialist knowledge.",
+      "files": [],
+      "createdAt": 1786665600000,
+      "tags": {
+        "skills": [],
+        "behaviours": [],
+        "impacts": ["Growth and social value"],
+        "consulting": ["Commercial Stewardship"]
+      }
+    },
+    {
+      "id": "demo-9",
+      "date": "2026-09-03",
+      "title": "Handled a failed overnight load",
+      "text": "A source system changed a column type and the load failed. I found the cause, fixed the model, told the client before their morning meeting and added a test for schema changes.",
+      "summary": "Resolved a production failure quickly and prevented a repeat.",
+      "files": [],
+      "createdAt": 1788393600000,
+      "tags": {
+        "skills": [],
+        "behaviours": [
+          {
+            "name": "Owning and delivering",
+            "band": "9",
+            "why": "Kept affected people informed and addressed the cause."
+          }
+        ],
+        "impacts": ["Client delivery"],
+        "consulting": []
+      }
+    }
+  ],
+  "certs": [
+    {
+      "id": "demo-c1",
+      "title": "Data Engineering Zoomcamp",
+      "provider": "DataTalksClub",
+      "date": "2026-04-18",
+      "topic": "data-engineering",
+      "fileName": "zoomcamp-certificate.png",
+      "fileType": "image/png",
+      "url": "https://github.com/DataTalksClub/data-engineering-zoomcamp"
+    },
+    {
+      "id": "demo-c2",
+      "title": "AWS Certified Cloud Practitioner",
+      "provider": "AWS",
+      "date": "2025-11-02",
+      "topic": "cloud-infra",
+      "fileName": "aws-cloud-practitioner.png",
+      "fileType": "image/png",
+      "url": ""
+    }
+  ]
+}

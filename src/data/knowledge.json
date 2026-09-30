@@ -1,0 +1,2047 @@
+{
+  "topics": [
+    {
+      "id": "data-modelling",
+      "name": "Data modelling",
+      "questions": [
+        {
+          "q": "What does third normal form (3NF) remove from a relational model?",
+          "options": [
+            "Repeating groups of columns",
+            "Partial dependencies on part of a composite key",
+            "Transitive dependencies, where a non-key column depends on another non-key column",
+            "All foreign keys"
+          ],
+          "correct": 2,
+          "explain": "1NF removes repeating groups, 2NF removes partial dependencies, and 3NF removes transitive dependencies."
+        },
+        {
+          "q": "In a star schema, what does a fact table usually hold?",
+          "options": [
+            "Descriptive attributes such as customer names",
+            "Measurements of business events, with keys to the dimension tables",
+            "Only lookup codes",
+            "Audit history for every table"
+          ],
+          "correct": 1,
+          "explain": "Facts are the measurable events (a repair, a payment). Dimensions describe them (who, what, where, when)."
+        },
+        {
+          "q": "How does a Type 2 slowly changing dimension handle a change, such as a tenant moving address?",
+          "options": [
+            "It overwrites the old value",
+            "It adds a new row with effective dates, keeping the old row as history",
+            "It adds a new column for the previous value",
+            "It deletes the record"
+          ],
+          "correct": 1,
+          "explain": "Type 1 overwrites, Type 2 adds a new versioned row, Type 3 keeps a limited previous value in a column."
+        },
+        {
+          "q": "Which level of data model shows the main business concepts and how they relate, without technical detail?",
+          "options": ["Physical", "Logical", "Conceptual", "Canonical"],
+          "correct": 2,
+          "explain": "Conceptual models describe business concepts. Logical models add attributes and keys. Physical models add database specifics."
+        },
+        {
+          "q": "What is a surrogate key?",
+          "options": [
+            "A key made from several business columns",
+            "A system-generated identifier with no business meaning",
+            "A key that points to another table",
+            "An encrypted national insurance number"
+          ],
+          "correct": 1,
+          "explain": "Surrogate keys stay stable even when business identifiers change or clash across sources."
+        }
+      ]
+    },
+    {
+      "id": "data-architecture",
+      "name": "Data architecture",
+      "questions": [
+        {
+          "q": "What's the main difference between a data lake and a data warehouse?",
+          "options": [
+            "Lakes are always on-premises",
+            "A lake holds raw data in many formats, with structure applied when it's read. A warehouse holds modelled, structured data",
+            "Warehouses can't store history",
+            "There's no difference"
+          ],
+          "correct": 1,
+          "explain": "Lakes use schema on read; warehouses use schema on write. Lakehouses combine elements of both."
+        },
+        {
+          "q": "What does data lineage describe?",
+          "options": [
+            "Who is allowed to see data",
+            "Where data came from and how it moved and changed along the way",
+            "How fast a query runs",
+            "The order columns appear in"
+          ],
+          "correct": 1,
+          "explain": "Lineage helps with trust, impact analysis and debugging when numbers look wrong."
+        },
+        {
+          "q": "In a data mesh, who owns data products?",
+          "options": [
+            "A central data team",
+            "The domain teams closest to the data",
+            "The cloud provider",
+            "The data protection officer"
+          ],
+          "correct": 1,
+          "explain": "Data mesh treats data as a product owned by domains, on a shared self-serve platform with federated governance."
+        },
+        {
+          "q": "What is master data management for?",
+          "options": [
+            "Backing up databases",
+            "Creating one trusted version of core entities, such as people, properties or products",
+            "Managing database administrators",
+            "Compressing large files"
+          ],
+          "correct": 1,
+          "explain": "MDM matches and merges records from different systems so everyone uses the same core entities."
+        },
+        {
+          "q": "Metadata is best described as:",
+          "options": [
+            "Data about data, such as definitions, owners, formats and lineage",
+            "Very large datasets",
+            "Data that has been deleted",
+            "Encrypted data"
+          ],
+          "correct": 0,
+          "explain": "Good metadata makes data findable, understandable and trustworthy."
+        }
+      ]
+    },
+    {
+      "id": "data-governance",
+      "name": "Data governance and protection",
+      "questions": [
+        {
+          "q": "Which of these is a lawful basis for processing personal data under UK GDPR?",
+          "options": [
+            "The data is already in a spreadsheet",
+            "Public task",
+            "It would be commercially useful",
+            "The data is more than a year old"
+          ],
+          "correct": 1,
+          "explain": "The six lawful bases are consent, contract, legal obligation, vital interests, public task and legitimate interests."
+        },
+        {
+          "q": "When do you need a Data Protection Impact Assessment (DPIA)?",
+          "options": [
+            "Only when a breach has happened",
+            "When processing is likely to result in a high risk to individuals",
+            "Never, for public bodies",
+            "Only for paper records"
+          ],
+          "correct": 1,
+          "explain": "DPIAs are required for high-risk processing, such as large-scale use of special category data or new technologies."
+        },
+        {
+          "q": "What does data minimisation mean?",
+          "options": [
+            "Compressing files",
+            "Collecting and keeping only the personal data you need for your purpose",
+            "Deleting all data after a month",
+            "Only using small databases"
+          ],
+          "correct": 1,
+          "explain": "It's one of the UK GDPR principles, alongside purpose limitation and storage limitation."
+        },
+        {
+          "q": "Which of these is a data quality dimension in the Government Data Quality Framework?",
+          "options": ["Velocity", "Popularity", "Timeliness", "Volume"],
+          "correct": 2,
+          "explain": "The six dimensions are accuracy, completeness, consistency, timeliness, uniqueness and validity."
+        },
+        {
+          "q": "What is a data steward usually responsible for?",
+          "options": [
+            "Buying database licences",
+            "The day-to-day quality, definitions and correct use of a set of data",
+            "Physical security of the data centre",
+            "Writing the privacy notice only"
+          ],
+          "correct": 1,
+          "explain": "Stewards look after data on behalf of the data owner, who stays accountable."
+        }
+      ]
+    },
+    {
+      "id": "data-engineering",
+      "name": "Data engineering",
+      "questions": [
+        {
+          "q": "How is ELT different from ETL?",
+          "options": [
+            "ELT never transforms data",
+            "ELT loads raw data into the target first, then transforms it there",
+            "ELT only works with files",
+            "They are the same"
+          ],
+          "correct": 1,
+          "explain": "ELT uses the power of modern warehouses to transform after loading, often with tools like dbt."
+        },
+        {
+          "q": "What makes a data pipeline idempotent?",
+          "options": [
+            "It runs very fast",
+            "Running it more than once with the same input gives the same result",
+            "It never fails",
+            "It only runs once a day"
+          ],
+          "correct": 1,
+          "explain": "Idempotent pipelines can be safely re-run after a failure without creating duplicates."
+        },
+        {
+          "q": "What does change data capture (CDC) do?",
+          "options": [
+            "Captures screenshots of dashboards",
+            "Identifies changes in source data so only those changes are moved",
+            "Changes data types automatically",
+            "Encrypts data at rest"
+          ],
+          "correct": 1,
+          "explain": "CDC reduces load and latency compared with copying whole tables every time."
+        },
+        {
+          "q": "Why partition a very large table by date?",
+          "options": [
+            "To make it look tidier",
+            "So queries that filter by date only read the partitions they need",
+            "To stop people editing it",
+            "Partitioning always doubles storage"
+          ],
+          "correct": 1,
+          "explain": "Partition pruning cuts the amount of data scanned, which saves time and cost."
+        },
+        {
+          "q": "Which SQL clause filters groups after aggregation?",
+          "options": ["WHERE", "HAVING", "ORDER BY", "LIMIT"],
+          "correct": 1,
+          "explain": "WHERE filters rows before grouping; HAVING filters the grouped results."
+        }
+      ]
+    },
+    {
+      "id": "data-analysis",
+      "name": "Data analysis",
+      "questions": [
+        {
+          "q": "A dataset of rent arrears has a few very large values. Which average is least affected by them?",
+          "options": ["Mean", "Median", "Sum", "Range"],
+          "correct": 1,
+          "explain": "The median is robust to outliers; the mean gets pulled towards them."
+        },
+        {
+          "q": "Two measures move together strongly. What can you conclude?",
+          "options": [
+            "One causes the other",
+            "They are correlated, but that alone doesn't show causation",
+            "The data is wrong",
+            "They are the same measure"
+          ],
+          "correct": 1,
+          "explain": "Correlation needs further evidence, such as an experiment or a clear mechanism, before claiming cause."
+        },
+        {
+          "q": "What is data profiling?",
+          "options": [
+            "Building user personas",
+            "Examining source data to understand its structure, content and quality",
+            "Deleting sensitive fields",
+            "Creating dashboards"
+          ],
+          "correct": 1,
+          "explain": "Profiling finds nulls, outliers, formats and duplicates before you rely on the data."
+        },
+        {
+          "q": "Which chart best shows how a measure changes over months?",
+          "options": [
+            "Pie chart",
+            "Line chart",
+            "Scatter plot of unrelated variables",
+            "Word cloud"
+          ],
+          "correct": 1,
+          "explain": "Line charts show trends over time clearly."
+        },
+        {
+          "q": "What does a LEFT JOIN return?",
+          "options": [
+            "Only rows that match in both tables",
+            "All rows from the left table, plus matching rows from the right table",
+            "All rows from both tables",
+            "Only rows from the right table"
+          ],
+          "correct": 1,
+          "explain": "Unmatched rows from the right table appear as nulls."
+        }
+      ]
+    },
+    {
+      "id": "qa-testing",
+      "name": "QA and testing",
+      "questions": [
+        {
+          "q": "In the test pyramid, which kind of test should you have the most of?",
+          "options": ["Manual end-to-end tests", "UI tests", "Unit tests", "Exploratory tests"],
+          "correct": 2,
+          "explain": "Unit tests are fast and cheap, so they form the wide base. End-to-end tests sit at the narrow top."
+        },
+        {
+          "q": "What is regression testing for?",
+          "options": [
+            "Testing a brand new feature for the first time",
+            "Checking that recent changes haven't broken existing behaviour",
+            "Measuring server load",
+            "Checking spelling"
+          ],
+          "correct": 1,
+          "explain": "Automated regression suites give teams confidence to release often."
+        },
+        {
+          "q": "A field accepts whole numbers from 1 to 100. Which values does boundary value analysis focus on?",
+          "options": [
+            "50 only",
+            "0, 1, 100 and 101",
+            "Any three random numbers",
+            "Only negative numbers"
+          ],
+          "correct": 1,
+          "explain": "Defects cluster at the edges, so you test on and either side of each boundary."
+        },
+        {
+          "q": "Which of these is non-functional testing?",
+          "options": [
+            "Checking the submit button saves a form",
+            "Load and performance testing",
+            "Checking a calculation is correct",
+            "Unit testing a function"
+          ],
+          "correct": 1,
+          "explain": "Non-functional testing covers qualities such as performance, security and accessibility."
+        },
+        {
+          "q": "What's the difference between verification and validation?",
+          "options": [
+            "There is none",
+            "Verification checks we built it right (to spec). Validation checks we built the right thing (for users)",
+            "Validation is only for data",
+            "Verification is done by users"
+          ],
+          "correct": 1,
+          "explain": "Both matter: a product can meet the spec and still fail its users."
+        }
+      ]
+    },
+    {
+      "id": "agile-delivery",
+      "name": "Agile delivery",
+      "questions": [
+        {
+          "q": "In the GOV.UK service lifecycle, which phase comes after discovery?",
+          "options": ["Beta", "Live", "Alpha", "Retirement"],
+          "correct": 2,
+          "explain": "The phases are discovery, alpha, beta and live."
+        },
+        {
+          "q": "What is a retrospective for?",
+          "options": [
+            "Reporting progress to the client",
+            "The team looking at how it worked and agreeing improvements",
+            "Estimating the backlog",
+            "Demonstrating the product"
+          ],
+          "correct": 1,
+          "explain": "Retros are how teams inspect and adapt their ways of working."
+        },
+        {
+          "q": "Why use work-in-progress (WIP) limits in Kanban?",
+          "options": [
+            "To keep people busy",
+            "To limit how much is in progress at once, improving flow and exposing bottlenecks",
+            "To stop new work arriving",
+            "To measure individual performance"
+          ],
+          "correct": 1,
+          "explain": "Finishing work before starting more reduces context switching and cycle time."
+        },
+        {
+          "q": "In Scrum, who is accountable for ordering the product backlog to maximise value?",
+          "options": [
+            "Scrum Master",
+            "Delivery Manager",
+            "Product Owner",
+            "The client's finance team"
+          ],
+          "correct": 2,
+          "explain": "The Product Owner owns the backlog and its order."
+        },
+        {
+          "q": "What is a team's velocity best used for?",
+          "options": [
+            "Comparing teams",
+            "The team's own planning and forecasting",
+            "Performance reviews",
+            "Setting contract prices"
+          ],
+          "correct": 1,
+          "explain": "Velocity is team-specific; comparing teams with it creates bad incentives."
+        }
+      ]
+    },
+    {
+      "id": "project-finance",
+      "name": "Financial and project management",
+      "questions": [
+        {
+          "q": "What does burn rate describe on a project?",
+          "options": [
+            "The pace at which budget is being spent over time",
+            "How tired the team is",
+            "The number of defects",
+            "The speed of the servers"
+          ],
+          "correct": 0,
+          "explain": "Tracking burn against plan shows early whether you'll overspend."
+        },
+        {
+          "q": "How is a time and materials contract different from fixed price?",
+          "options": [
+            "There's no difference",
+            "Time and materials charges for time actually spent. Fixed price agrees a total for a defined scope",
+            "Fixed price has no scope",
+            "Time and materials is always cheaper"
+          ],
+          "correct": 1,
+          "explain": "Each shifts risk differently between client and supplier."
+        },
+        {
+          "q": "What does a RAID log track?",
+          "options": [
+            "Only financial data",
+            "Risks, assumptions (or actions), issues and dependencies",
+            "Team holidays",
+            "Server backups"
+          ],
+          "correct": 1,
+          "explain": "RAID logs keep the things that could derail delivery visible."
+        },
+        {
+          "q": "What is contingency?",
+          "options": [
+            "Budget or time held back for identified risks",
+            "The profit margin",
+            "A penalty clause",
+            "The final invoice"
+          ],
+          "correct": 0,
+          "explain": "Contingency is sized from risks and released as they're managed."
+        },
+        {
+          "q": "In a consultancy, what does utilisation measure?",
+          "options": [
+            "Client satisfaction",
+            "The share of available time spent on billable work",
+            "Office occupancy",
+            "Number of projects won"
+          ],
+          "correct": 1,
+          "explain": "Utilisation affects the sustainability of the business, alongside day rates."
+        }
+      ]
+    },
+    {
+      "id": "product",
+      "name": "Product management",
+      "questions": [
+        {
+          "q": "What's the difference between an output and an outcome?",
+          "options": [
+            "None",
+            "An output is something delivered. An outcome is the change it creates for users or the organisation",
+            "Outcomes are always financial",
+            "Outputs are measured by users"
+          ],
+          "correct": 1,
+          "explain": "Teams should measure success by outcomes, not by features shipped."
+        },
+        {
+          "q": "What is a minimum viable product for?",
+          "options": [
+            "The final version",
+            "Learning whether an idea works with real users, for the least effort",
+            "Cutting quality",
+            "Pleasing stakeholders"
+          ],
+          "correct": 1,
+          "explain": "An MVP tests a hypothesis; it isn't a cheap version of the whole product."
+        },
+        {
+          "q": "Which of these is one of the GOV.UK recommended measures for a service?",
+          "options": ["Number of meetings", "Completion rate", "Lines of code", "Number of pages"],
+          "correct": 1,
+          "explain": "The four suggested measures are cost per transaction, user satisfaction, completion rate and digital take-up."
+        },
+        {
+          "q": "In MoSCoW prioritisation, what does the W stand for?",
+          "options": ["Would like", "Won't have this time", "Wish list", "Weekly"],
+          "correct": 1,
+          "explain": "Must, Should, Could, Won't (this time)."
+        },
+        {
+          "q": "What is benefits realisation?",
+          "options": [
+            "Writing the business case",
+            "Tracking whether expected benefits actually happen after delivery, and acting if not",
+            "Paying suppliers",
+            "Listing features"
+          ],
+          "correct": 1,
+          "explain": "Benefits are often realised after launch, so ownership needs to continue."
+        }
+      ]
+    },
+    {
+      "id": "business-analysis",
+      "name": "Business analysis",
+      "questions": [
+        {
+          "q": "Which format is commonly used for user stories?",
+          "options": [
+            "As a [user], I want [goal], so that [reason]",
+            "The system shall…",
+            "Given, when, then",
+            "Must, should, could"
+          ],
+          "correct": 0,
+          "explain": "Given, when, then is often used for acceptance criteria rather than the story itself."
+        },
+        {
+          "q": "What is BPMN used for?",
+          "options": [
+            "Designing logos",
+            "Modelling business processes",
+            "Writing SQL",
+            "Testing performance"
+          ],
+          "correct": 1,
+          "explain": "Business Process Model and Notation is a standard way to draw process flows."
+        },
+        {
+          "q": "Which technique helps find the root cause of a problem?",
+          "options": ["MoSCoW", "5 whys", "Story points", "A RACI chart"],
+          "correct": 1,
+          "explain": "Asking why repeatedly moves you from symptoms to causes."
+        },
+        {
+          "q": "What do acceptance criteria describe?",
+          "options": [
+            "The project budget",
+            "The conditions a story must meet to be accepted as done",
+            "The team's working hours",
+            "The system architecture"
+          ],
+          "correct": 1,
+          "explain": "Clear criteria reduce rework and help testers."
+        },
+        {
+          "q": "What is as-is and to-be modelling?",
+          "options": [
+            "Comparing two suppliers",
+            "Mapping how a process works now and how it should work after the change",
+            "Forecasting budgets",
+            "A type of database"
+          ],
+          "correct": 1,
+          "explain": "The gap between them shows what needs to change."
+        }
+      ]
+    },
+    {
+      "id": "accessibility",
+      "name": "Accessibility",
+      "questions": [
+        {
+          "q": "What is the minimum contrast ratio for normal body text under WCAG level AA?",
+          "options": ["2:1", "3:1", "4.5:1", "7:1"],
+          "correct": 2,
+          "explain": "4.5:1 for normal text, 3:1 for large text. 7:1 is the AAA level."
+        },
+        {
+          "q": "Which standard must UK public sector websites meet?",
+          "options": ["WCAG 2.2 level AA", "WCAG 1.0 level A", "No standard applies", "Only AAA"],
+          "correct": 0,
+          "explain": "The Public Sector Bodies Accessibility Regulations require WCAG AA; GDS now monitors against WCAG 2.2."
+        },
+        {
+          "q": "What alt text should a purely decorative image have?",
+          "options": [
+            "The file name",
+            "An empty alt attribute (alt=\"\")",
+            "The word image",
+            "A long description"
+          ],
+          "correct": 1,
+          "explain": "An empty alt tells screen readers to skip it."
+        },
+        {
+          "q": "What do the WCAG principles POUR stand for?",
+          "options": [
+            "Perceivable, operable, understandable, robust",
+            "Plain, open, usable, readable",
+            "Public, open, user, responsive",
+            "Perceptive, organised, useful, reliable"
+          ],
+          "correct": 0,
+          "explain": "They're the four principles behind every WCAG success criterion."
+        },
+        {
+          "q": "Why do properly marked-up headings matter for accessibility?",
+          "options": [
+            "They make pages load faster",
+            "Screen reader users navigate by them to understand and move through a page",
+            "They're only for search engines",
+            "They don't matter"
+          ],
+          "correct": 1,
+          "explain": "Heading structure is one of the most used navigation methods for screen reader users."
+        }
+      ]
+    },
+    {
+      "id": "user-research",
+      "name": "User research",
+      "questions": [
+        {
+          "q": "Which of these is the least leading interview question?",
+          "options": [
+            "Don't you find the form confusing?",
+            "Tell me about the last time you applied for this",
+            "Would you like a better form?",
+            "How much do you love the new design?"
+          ],
+          "correct": 1,
+          "explain": "Open questions about real past behaviour give more reliable insight."
+        },
+        {
+          "q": "What happens in usability testing?",
+          "options": [
+            "Users fill in a satisfaction survey",
+            "You watch people try to complete real tasks with a prototype or service",
+            "Developers test code",
+            "You count page views"
+          ],
+          "correct": 1,
+          "explain": "Observing behaviour shows problems people may not report."
+        },
+        {
+          "q": "What does informed consent mean in research?",
+          "options": [
+            "Participants sign anything you give them",
+            "Participants understand what's involved, how their data is used, and that they can withdraw",
+            "Only managers need to agree",
+            "Consent isn't needed for short sessions"
+          ],
+          "correct": 1,
+          "explain": "It's an ethical and legal foundation of research."
+        },
+        {
+          "q": "What is affinity mapping used for?",
+          "options": [
+            "Scheduling sessions",
+            "Grouping research observations to find patterns and themes",
+            "Recruiting participants",
+            "Pricing research"
+          ],
+          "correct": 1,
+          "explain": "It's a common synthesis technique."
+        },
+        {
+          "q": "What is qualitative research best at answering?",
+          "options": [
+            "How many people did something",
+            "Why and how people behave as they do",
+            "Exact conversion rates",
+            "Server response times"
+          ],
+          "correct": 1,
+          "explain": "Quantitative research answers how many; qualitative explains why."
+        }
+      ]
+    },
+    {
+      "id": "content-design",
+      "name": "Content design",
+      "questions": [
+        {
+          "q": "What does front-loading mean in content design?",
+          "options": [
+            "Putting images first",
+            "Putting the most important words at the start of headings, links and sentences",
+            "Writing the summary last",
+            "Using capital letters"
+          ],
+          "correct": 1,
+          "explain": "People scan the first few words, so lead with what matters."
+        },
+        {
+          "q": "What reading age does GOV.UK aim to write for, to be understood by most people?",
+          "options": ["9", "14", "18", "Degree level"],
+          "correct": 0,
+          "explain": "Writing for a reading age of 9 helps everyone, including experts in a hurry."
+        },
+        {
+          "q": "What is pair writing?",
+          "options": [
+            "Two content designers writing different pages",
+            "A content designer and a subject expert writing together",
+            "Writing in two languages",
+            "Proofreading only"
+          ],
+          "correct": 1,
+          "explain": "It builds shared understanding and speeds up sign-off."
+        },
+        {
+          "q": "What makes good link text?",
+          "options": [
+            "Click here",
+            "Text that describes where the link goes",
+            "The full web address",
+            "Read more"
+          ],
+          "correct": 1,
+          "explain": "Descriptive links help everyone, especially screen reader users who list links out of context."
+        },
+        {
+          "q": "Which is plain English?",
+          "options": ["Purchase", "Buy", "Procure", "Acquire"],
+          "correct": 1,
+          "explain": "The TPXimpact guide says the same: buy, not purchase."
+        }
+      ]
+    },
+    {
+      "id": "service-design",
+      "name": "Service design",
+      "questions": [
+        {
+          "q": "What does a service blueprint show that a journey map usually doesn't?",
+          "options": [
+            "User emotions",
+            "The behind-the-scenes people, processes and systems supporting each step",
+            "The brand colours",
+            "Only the digital steps"
+          ],
+          "correct": 1,
+          "explain": "Blueprints connect front-stage experience with back-stage delivery."
+        },
+        {
+          "q": "What is the first point of the GOV.UK Service Standard?",
+          "options": [
+            "Use open source",
+            "Understand users and their needs",
+            "Choose the right tools",
+            "Operate a reliable service"
+          ],
+          "correct": 1,
+          "explain": "Point 2 is to solve a whole problem for users."
+        },
+        {
+          "q": "Why start with low-fidelity prototypes?",
+          "options": [
+            "They look more professional",
+            "They let you test ideas quickly and cheaply before committing",
+            "Users prefer them",
+            "They're required by law"
+          ],
+          "correct": 1,
+          "explain": "Raise fidelity as confidence grows."
+        },
+        {
+          "q": "What is a journey map?",
+          "options": [
+            "A sitemap",
+            "The steps a user goes through over time and their experience at each one",
+            "A project plan",
+            "A database diagram"
+          ],
+          "correct": 1,
+          "explain": "It helps teams see the service from the user's point of view."
+        },
+        {
+          "q": "What does solving a whole problem for users mean?",
+          "options": [
+            "Building every feature at once",
+            "Designing around the user's full task across channels and organisations, not one team's piece",
+            "Only fixing bugs",
+            "Ignoring policy"
+          ],
+          "correct": 1,
+          "explain": "Users don't care about organisational boundaries."
+        }
+      ]
+    },
+    {
+      "id": "interaction-design",
+      "name": "Interaction design",
+      "questions": [
+        {
+          "q": "What should a good error message do?",
+          "options": [
+            "Show an error code",
+            "Say what went wrong and how to fix it, in plain language",
+            "Blame the user",
+            "Disappear quickly"
+          ],
+          "correct": 1,
+          "explain": "The GOV.UK Design System has detailed guidance on error messages."
+        },
+        {
+          "q": "What is a design system?",
+          "options": [
+            "A folder of logos",
+            "Reusable components and patterns, with guidance on when and how to use them",
+            "A project plan",
+            "A single style guide PDF"
+          ],
+          "correct": 1,
+          "explain": "It keeps services consistent and speeds up delivery."
+        },
+        {
+          "q": "What is progressive disclosure?",
+          "options": [
+            "Showing everything at once",
+            "Showing only what's needed now and revealing more when it's asked for",
+            "Hiding information from users",
+            "Releasing features slowly"
+          ],
+          "correct": 1,
+          "explain": "It reduces cognitive load."
+        },
+        {
+          "q": "What does Fitts's law tell us?",
+          "options": [
+            "Users read in an F pattern",
+            "The time to reach a target depends on its size and distance",
+            "Seven items is the memory limit",
+            "Users prefer dark mode"
+          ],
+          "correct": 1,
+          "explain": "Make important targets bigger and easier to reach."
+        },
+        {
+          "q": "Why does GOV.UK often use a one thing per page pattern?",
+          "options": [
+            "To make more pages",
+            "It helps people focus, reduces errors and works well on mobile",
+            "It's cheaper to host",
+            "It hides complexity from developers"
+          ],
+          "correct": 1,
+          "explain": "It's a well-tested pattern for complex forms."
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "questions": [
+        {
+          "q": "What is the principle of least privilege?",
+          "options": [
+            "Give everyone admin rights to save time",
+            "Give people and systems only the access they need to do their job",
+            "Remove all passwords",
+            "Only managers can log in"
+          ],
+          "correct": 1,
+          "explain": "It limits damage if an account is compromised."
+        },
+        {
+          "q": "What's the best defence against SQL injection?",
+          "options": [
+            "Hiding error messages",
+            "Parameterised queries",
+            "Longer passwords",
+            "Using a VPN"
+          ],
+          "correct": 1,
+          "explain": "Parameterised queries keep data separate from commands."
+        },
+        {
+          "q": "Multi-factor authentication combines:",
+          "options": [
+            "Two passwords",
+            "Two or more different kinds of factor, such as something you know and something you have",
+            "A username and an email",
+            "Two browsers"
+          ],
+          "correct": 1,
+          "explain": "Two passwords are the same factor type."
+        },
+        {
+          "q": "Which is in the OWASP Top 10?",
+          "options": [
+            "Broken access control",
+            "Slow page loads",
+            "Poor colour contrast",
+            "Missing documentation"
+          ],
+          "correct": 0,
+          "explain": "Broken access control is at the top of the 2021 list."
+        },
+        {
+          "q": "What protects data while it travels over a network?",
+          "options": [
+            "Encryption at rest",
+            "TLS (encryption in transit)",
+            "Backups",
+            "Firewalls alone"
+          ],
+          "correct": 1,
+          "explain": "Use both encryption in transit and at rest."
+        }
+      ]
+    },
+    {
+      "id": "cloud-infra",
+      "name": "Cloud infrastructure",
+      "questions": [
+        {
+          "q": "What is a key benefit of infrastructure as code?",
+          "options": [
+            "No need for testing",
+            "Repeatable, version-controlled environments that can be reviewed like code",
+            "It's always free",
+            "It removes the need for security"
+          ],
+          "correct": 1,
+          "explain": "Tools include Terraform, Bicep and CloudFormation."
+        },
+        {
+          "q": "What is horizontal scaling?",
+          "options": [
+            "Adding more CPU to one server",
+            "Adding more instances to share the load",
+            "Making screens wider",
+            "Moving to a new region"
+          ],
+          "correct": 1,
+          "explain": "Vertical scaling makes one machine bigger; horizontal adds more machines."
+        },
+        {
+          "q": "What does recovery time objective (RTO) mean?",
+          "options": [
+            "How much data you can lose",
+            "The longest acceptable time to restore a service after an outage",
+            "How often backups run",
+            "The time to deploy code"
+          ],
+          "correct": 1,
+          "explain": "RPO is how much data you can afford to lose."
+        },
+        {
+          "q": "Why deploy across multiple availability zones?",
+          "options": [
+            "To lower the bill",
+            "So the service survives the failure of one data centre",
+            "To speed up development",
+            "It's required by GDPR"
+          ],
+          "correct": 1,
+          "explain": "It's a core resilience pattern."
+        },
+        {
+          "q": "What does terraform plan do?",
+          "options": [
+            "Applies changes immediately",
+            "Shows the changes Terraform would make, without making them",
+            "Deletes the state file",
+            "Creates a diagram"
+          ],
+          "correct": 1,
+          "explain": "Reviewing the plan before apply catches mistakes."
+        }
+      ]
+    },
+    {
+      "id": "software-engineering",
+      "name": "Software engineering",
+      "questions": [
+        {
+          "q": "What is continuous integration?",
+          "options": [
+            "Releasing once a year",
+            "Merging small changes often, with automated builds and tests on every change",
+            "Integrating with a CRM",
+            "Manual code review only"
+          ],
+          "correct": 1,
+          "explain": "It finds problems early, while they're small."
+        },
+        {
+          "q": "Which HTTP method should be safe and idempotent for reading data?",
+          "options": ["POST", "GET", "PATCH", "CONNECT"],
+          "correct": 1,
+          "explain": "GET shouldn't change state."
+        },
+        {
+          "q": "What is refactoring?",
+          "options": [
+            "Adding features",
+            "Changing the structure of code without changing its behaviour",
+            "Rewriting in a new language",
+            "Deleting tests"
+          ],
+          "correct": 1,
+          "explain": "Good tests make refactoring safe."
+        },
+        {
+          "q": "In semantic versioning, which part changes for a breaking change?",
+          "options": ["PATCH", "MINOR", "MAJOR", "BUILD"],
+          "correct": 2,
+          "explain": "MAJOR.MINOR.PATCH: breaking changes bump MAJOR."
+        },
+        {
+          "q": "What is the main value of code review?",
+          "options": [
+            "Finding someone to blame",
+            "Sharing knowledge and catching issues early",
+            "Slowing releases down",
+            "Checking formatting only"
+          ],
+          "correct": 1,
+          "explain": "Reviews spread understanding across the team."
+        }
+      ]
+    },
+    {
+      "id": "architecture-strategy",
+      "name": "Architecture and technology strategy",
+      "questions": [
+        {
+          "q": "What is an architecture decision record (ADR)?",
+          "options": [
+            "A diagram of servers",
+            "A short record of a decision, its context and consequences",
+            "A contract",
+            "A test report"
+          ],
+          "correct": 1,
+          "explain": "ADRs help future teams understand why things are the way they are."
+        },
+        {
+          "q": "What does loose coupling allow?",
+          "options": [
+            "Systems to change and scale independently",
+            "Faster typing",
+            "Fewer users",
+            "No need for APIs"
+          ],
+          "correct": 0,
+          "explain": "Tightly coupled systems force changes to ripple across each other."
+        },
+        {
+          "q": "What should a build-or-buy decision consider beyond the purchase price?",
+          "options": [
+            "Nothing else",
+            "Total cost of ownership, fit with user needs, lock-in and skills to run it",
+            "Only the supplier's logo",
+            "The colour scheme"
+          ],
+          "correct": 1,
+          "explain": "The Technology Code of Practice asks teams to consider these."
+        },
+        {
+          "q": "What is TOGAF's Architecture Development Method (ADM)?",
+          "options": [
+            "A programming language",
+            "A method for developing and managing enterprise architecture",
+            "A cloud service",
+            "A testing framework"
+          ],
+          "correct": 1,
+          "explain": "It's a cycle from vision through to change management."
+        },
+        {
+          "q": "Which does the Technology Code of Practice encourage?",
+          "options": [
+            "Proprietary formats",
+            "Open standards and making source code open",
+            "Avoiding the cloud",
+            "Single-supplier deals"
+          ],
+          "correct": 1,
+          "explain": "It also asks teams to use cloud first and make things secure."
+        }
+      ]
+    },
+    {
+      "id": "service-management",
+      "name": "Service management",
+      "questions": [
+        {
+          "q": "What's the difference between an incident and a problem?",
+          "options": [
+            "They're the same",
+            "An incident is an unplanned interruption. A problem is the underlying cause of one or more incidents",
+            "Problems are smaller",
+            "Incidents only affect servers"
+          ],
+          "correct": 1,
+          "explain": "Incident management restores service; problem management prevents recurrence."
+        },
+        {
+          "q": "What is a service level agreement (SLA)?",
+          "options": [
+            "An internal to-do list",
+            "An agreement on the levels of service a provider will deliver",
+            "A software licence",
+            "A job description"
+          ],
+          "correct": 1,
+          "explain": "SLAs set targets such as response and resolution times."
+        },
+        {
+          "q": "What does a configuration management database (CMDB) hold?",
+          "options": [
+            "Staff salaries",
+            "Configuration items and how they relate to each other",
+            "Customer complaints only",
+            "Marketing plans"
+          ],
+          "correct": 1,
+          "explain": "It helps assess the impact of changes and incidents."
+        },
+        {
+          "q": "What does first contact resolution measure?",
+          "options": [
+            "How fast the phone is answered",
+            "Requests resolved at the first contact, without escalation",
+            "Number of tickets closed per day",
+            "Customer age"
+          ],
+          "correct": 1,
+          "explain": "It's a strong indicator of service desk effectiveness."
+        },
+        {
+          "q": "Which improvement cycle is widely used in service management?",
+          "options": [
+            "Plan, do, check, act",
+            "Build, burn, blame",
+            "Code, commit, crash",
+            "Wait, watch, worry"
+          ],
+          "correct": 0,
+          "explain": "PDCA underpins continual service improvement."
+        }
+      ]
+    },
+    {
+      "id": "emerging-tech",
+      "name": "AI and emerging technology",
+      "questions": [
+        {
+          "q": "What is an AI hallucination?",
+          "options": [
+            "A system crash",
+            "Output that sounds confident but is wrong or made up",
+            "A slow response",
+            "An image generator"
+          ],
+          "correct": 1,
+          "explain": "Check facts and sources, especially in client work."
+        },
+        {
+          "q": "What should you do before using a generative AI tool with client data?",
+          "options": [
+            "Paste it in to save time",
+            "Check the tool is approved and follow data and security policies, avoiding personal or sensitive data unless allowed",
+            "Ask the tool if it's safe",
+            "Remove the client's logo"
+          ],
+          "correct": 1,
+          "explain": "The UK government's AI Playbook stresses this."
+        },
+        {
+          "q": "What does human in the loop mean?",
+          "options": [
+            "AI replaces human work",
+            "People review and can override AI outputs before they're acted on",
+            "Users must log in",
+            "Humans train every model"
+          ],
+          "correct": 1,
+          "explain": "It's key for high-impact decisions."
+        },
+        {
+          "q": "What does retrieval-augmented generation (RAG) do?",
+          "options": [
+            "Trains a model from scratch",
+            "Finds relevant documents and gives them to the model to ground its answer",
+            "Compresses images",
+            "Translates code"
+          ],
+          "correct": 1,
+          "explain": "It reduces hallucinations and keeps answers current."
+        },
+        {
+          "q": "Which usually improves a prompt?",
+          "options": [
+            "Keeping it vague",
+            "Giving clear context, the goal, the format you want and examples",
+            "Using capital letters",
+            "Asking several unrelated things at once"
+          ],
+          "correct": 1,
+          "explain": "Specific prompts get specific results."
+        }
+      ]
+    },
+    {
+      "id": "capability",
+      "name": "Coaching and capability building",
+      "questions": [
+        {
+          "q": "What are the four stages of Kolb's experiential learning cycle?",
+          "options": [
+            "Plan, do, check, act",
+            "Concrete experience, reflective observation, abstract conceptualisation, active experimentation",
+            "Forming, storming, norming, performing",
+            "Awareness, desire, knowledge, ability"
+          ],
+          "correct": 1,
+          "explain": "Our consulting skills programme draws on Kolb."
+        },
+        {
+          "q": "How is coaching different from mentoring?",
+          "options": [
+            "No difference",
+            "Coaching helps someone find their own answers. Mentoring shares the mentor's experience and advice",
+            "Coaching is always paid",
+            "Mentoring is only for graduates"
+          ],
+          "correct": 1,
+          "explain": "Both are useful; choose based on what the person needs."
+        },
+        {
+          "q": "What is psychological safety in a team?",
+          "options": [
+            "No one ever disagrees",
+            "People feel safe to speak up, ask questions and admit mistakes",
+            "Everyone works from home",
+            "Strict rules"
+          ],
+          "correct": 1,
+          "explain": "It's strongly linked to team learning and performance."
+        },
+        {
+          "q": "Which feedback model structures feedback as situation, behaviour and impact?",
+          "options": ["SBI", "SMART", "RACI", "SWOT"],
+          "correct": 0,
+          "explain": "It keeps feedback specific and about behaviour, not personality."
+        },
+        {
+          "q": "What's the main benefit of pairing with a client colleague?",
+          "options": [
+            "Halving the cost",
+            "Transferring skills so the client can carry on after you leave",
+            "Avoiding documentation",
+            "Working fewer hours"
+          ],
+          "correct": 1,
+          "explain": "Leaving clients confident is part of our purpose."
+        }
+      ]
+    },
+    {
+      "id": "impact-evaluation",
+      "name": "Impact and evaluation",
+      "questions": [
+        {
+          "q": "What is a theory of change?",
+          "options": [
+            "A budget",
+            "A description of how activities are expected to lead to outcomes and impact",
+            "A project plan",
+            "A risk register"
+          ],
+          "correct": 1,
+          "explain": "It makes assumptions explicit so they can be tested."
+        },
+        {
+          "q": "What is a counterfactual?",
+          "options": [
+            "A false result",
+            "What would have happened without the intervention",
+            "The final report",
+            "A type of survey"
+          ],
+          "correct": 1,
+          "explain": "Comparing with it shows the real difference made."
+        },
+        {
+          "q": "What is the Magenta Book?",
+          "options": [
+            "A design system",
+            "HM Treasury guidance on evaluation",
+            "A data standard",
+            "A procurement rulebook"
+          ],
+          "correct": 1,
+          "explain": "The Green Book covers appraisal; the Magenta Book covers evaluation."
+        },
+        {
+          "q": "What's the difference between process and impact evaluation?",
+          "options": [
+            "None",
+            "Process looks at how it was delivered. Impact looks at what difference it made",
+            "Impact evaluation is cheaper",
+            "Process evaluation uses no data"
+          ],
+          "correct": 1,
+          "explain": "Many evaluations combine both."
+        },
+        {
+          "q": "Why capture a baseline?",
+          "options": [
+            "To fill the report",
+            "So you can measure change against how things were before",
+            "It's optional decoration",
+            "To set the budget"
+          ],
+          "correct": 1,
+          "explain": "Without a baseline it's hard to show impact."
+        }
+      ]
+    },
+    {
+      "id": "org-design",
+      "name": "Organisation design",
+      "questions": [
+        {
+          "q": "What is span of control?",
+          "options": [
+            "The size of the budget",
+            "The number of people who report directly to a manager",
+            "The length of a contract",
+            "The number of offices"
+          ],
+          "correct": 1,
+          "explain": "Very wide or very narrow spans both bring problems."
+        },
+        {
+          "q": "What does an operating model describe?",
+          "options": [
+            "Only the org chart",
+            "How an organisation delivers value: its people, processes, technology, structure and governance",
+            "The pension scheme",
+            "The office layout"
+          ],
+          "correct": 1,
+          "explain": "Org design often starts from the target operating model."
+        },
+        {
+          "q": "What is Conway's law?",
+          "options": [
+            "Teams should be small",
+            "Systems tend to mirror the communication structures of the organisations that build them",
+            "Meetings expand to fill time",
+            "Costs always rise"
+          ],
+          "correct": 1,
+          "explain": "It's why org design and technology design are linked."
+        },
+        {
+          "q": "In a matrix structure, people typically:",
+          "options": [
+            "Have no manager",
+            "Report along two lines, such as practice and project",
+            "Work alone",
+            "Only work on one project"
+          ],
+          "correct": 1,
+          "explain": "Consultancies like ours often work this way."
+        },
+        {
+          "q": "Which model looks at strategy, structure, processes, rewards and people together?",
+          "options": ["Galbraith's star model", "The test pyramid", "The Kano model", "MoSCoW"],
+          "correct": 0,
+          "explain": "Changing one point affects the others."
+        }
+      ]
+    },
+    {
+      "id": "consulting",
+      "name": "Consulting skills",
+      "questions": [
+        {
+          "q": "What does MECE mean in structured problem solving?",
+          "options": [
+            "Most expensive, cheapest estimate",
+            "Mutually exclusive, collectively exhaustive",
+            "Measure everything, change everything",
+            "Meet each client early"
+          ],
+          "correct": 1,
+          "explain": "Breaking problems down with no overlaps and no gaps."
+        },
+        {
+          "q": "In a power and interest stakeholder grid, how should you treat high power, high interest stakeholders?",
+          "options": [
+            "Monitor them",
+            "Keep them informed only",
+            "Manage them closely",
+            "Ignore them"
+          ],
+          "correct": 2,
+          "explain": "Engage them actively and often."
+        },
+        {
+          "q": "What is a BATNA in negotiation?",
+          "options": [
+            "The opening offer",
+            "Your best alternative to a negotiated agreement",
+            "A contract clause",
+            "The final price"
+          ],
+          "correct": 1,
+          "explain": "Knowing it tells you when to walk away."
+        },
+        {
+          "q": "What is the pyramid principle in communication?",
+          "options": [
+            "Start with the detail and build to the answer",
+            "Lead with the main message, then the supporting arguments and evidence",
+            "Use triangles in slides",
+            "Always present three options"
+          ],
+          "correct": 1,
+          "explain": "Senior audiences want the answer first."
+        },
+        {
+          "q": "What's a facilitator's main job in a workshop?",
+          "options": [
+            "Giving the answers",
+            "Designing and guiding the process so the group reaches good outcomes together",
+            "Taking notes only",
+            "Presenting slides"
+          ],
+          "correct": 1,
+          "explain": "Good facilitation is mostly preparation."
+        }
+      ]
+    }
+  ],
+  "courses": [
+    {
+      "topic": "data-modelling",
+      "courses": [
+        {
+          "title": "Dimensional modelling techniques",
+          "provider": "Kimball Group",
+          "url": "https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/",
+          "cost": "Free",
+          "cert": false
+        },
+        {
+          "title": "Databases and SQL for Data Science with Python",
+          "provider": "IBM on Coursera",
+          "url": "https://www.coursera.org/learn/sql-data-science",
+          "cost": "Free to audit",
+          "cert": true
+        },
+        {
+          "title": "Certified Data Management Professional (CDMP)",
+          "provider": "DAMA",
+          "url": "https://cdmp.info/",
+          "cost": "Paid",
+          "cert": true
+        }
+      ]
+    },
+    {
+      "topic": "data-architecture",
+      "courses": [
+        {
+          "title": "Data mesh principles and logical architecture",
+          "provider": "martinfowler.com",
+          "url": "https://martinfowler.com/articles/data-mesh-principles.html",
+          "cost": "Free",
+          "cert": false
+        },
+        {
+          "title": "Azure Data Fundamentals (DP-900)",
+          "provider": "Microsoft Learn",
+          "url": "https://learn.microsoft.com/en-us/credentials/certifications/azure-data-fundamentals/",
+          "cost": "Free training, paid exam",
+          "cert": true
+        },
+        {
+          "title": "Data Management Body of Knowledge",
+          "provider": "DAMA",
+          "url": "https://www.dama.org/cpages/body-of-knowledge",
+          "cost": "Paid",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "data-governance",
+      "courses": [
+        {
+          "title": "UK GDPR guidance and resources",
+          "provider": "ICO",
+          "url": "https://ico.org.uk/for-organisations/",
+          "cost": "Free",
+          "cert": false
+        },
+        {
+          "title": "Government Data Quality Framework",
+          "provider": "GOV.UK",
+          "url": "https://www.gov.uk/government/publications/the-government-data-quality-framework",
+          "cost": "Free",
+          "cert": false
+        },
+        {
+          "title": "Data Ethics Framework",
+          "provider": "GOV.UK",
+          "url": "https://www.gov.uk/government/publications/data-ethics-framework",
+          "cost": "Free",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "data-engineering",
+      "courses": [
+        {
+          "title": "Data Engineering Zoomcamp",
+          "provider": "DataTalksClub",
+          "url": "https://github.com/DataTalksClub/data-engineering-zoomcamp",
+          "cost": "Free",
+          "cert": true
+        },
+        {
+          "title": "dbt Learn",
+          "provider": "dbt Labs",
+          "url": "https://learn.getdbt.com/",
+          "cost": "Free",
+          "cert": true
+        },
+        {
+          "title": "AWS Certified Data Engineer, Associate",
+          "provider": "AWS",
+          "url": "https://aws.amazon.com/certification/certified-data-engineer-associate/",
+          "cost": "Paid exam",
+          "cert": true
+        }
+      ]
+    },
+    {
+      "topic": "data-analysis",
+      "courses": [
+        {
+          "title": "Google Data Analytics Professional Certificate",
+          "provider": "Google on Coursera",
+          "url": "https://www.coursera.org/professional-certificates/google-data-analytics",
+          "cost": "Paid",
+          "cert": true
+        },
+        {
+          "title": "Kaggle Learn: Intro to SQL",
+          "provider": "Kaggle",
+          "url": "https://www.kaggle.com/learn/intro-to-sql",
+          "cost": "Free",
+          "cert": true
+        },
+        {
+          "title": "Power BI Data Analyst (PL-300)",
+          "provider": "Microsoft Learn",
+          "url": "https://learn.microsoft.com/en-us/credentials/certifications/data-analyst-associate/",
+          "cost": "Free training, paid exam",
+          "cert": true
+        }
+      ]
+    },
+    {
+      "topic": "qa-testing",
+      "courses": [
+        {
+          "title": "Test Automation University",
+          "provider": "Applitools",
+          "url": "https://testautomationu.applitools.com/",
+          "cost": "Free",
+          "cert": true
+        },
+        {
+          "title": "ISTQB certifications, starting with Foundation Level",
+          "provider": "ISTQB",
+          "url": "https://www.istqb.org/",
+          "cost": "Paid exam",
+          "cert": true
+        },
+        {
+          "title": "Ministry of Testing",
+          "provider": "Ministry of Testing",
+          "url": "https://www.ministryoftesting.com/",
+          "cost": "Free and paid",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "agile-delivery",
+      "courses": [
+        {
+          "title": "Professional Scrum Master I",
+          "provider": "Scrum.org",
+          "url": "https://www.scrum.org/assessments/professional-scrum-master-i-certification",
+          "cost": "Paid exam",
+          "cert": true
+        },
+        {
+          "title": "Agile delivery",
+          "provider": "GOV.UK Service Manual",
+          "url": "https://www.gov.uk/service-manual/agile-delivery",
+          "cost": "Free",
+          "cert": false
+        },
+        {
+          "title": "The Kanban Guide",
+          "provider": "Kanban Guides",
+          "url": "https://kanbanguides.org/",
+          "cost": "Free",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "project-finance",
+      "courses": [
+        {
+          "title": "APM qualifications and training",
+          "provider": "Association for Project Management",
+          "url": "https://www.apm.org.uk/qualifications-and-training/",
+          "cost": "Paid",
+          "cert": true
+        },
+        {
+          "title": "Managing Public Money",
+          "provider": "HM Treasury",
+          "url": "https://www.gov.uk/government/publications/managing-public-money",
+          "cost": "Free",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "product",
+      "courses": [
+        {
+          "title": "Professional Scrum Product Owner I",
+          "provider": "Scrum.org",
+          "url": "https://www.scrum.org/assessments/professional-scrum-product-owner-i-certification",
+          "cost": "Paid exam",
+          "cert": true
+        },
+        {
+          "title": "Measuring success",
+          "provider": "GOV.UK Service Manual",
+          "url": "https://www.gov.uk/service-manual/measuring-success",
+          "cost": "Free",
+          "cert": false
+        },
+        {
+          "title": "Mind the Product",
+          "provider": "Mind the Product",
+          "url": "https://www.mindtheproduct.com/",
+          "cost": "Free and paid",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "business-analysis",
+      "courses": [
+        {
+          "title": "Business analysis certifications",
+          "provider": "IIBA",
+          "url": "https://www.iiba.org/business-analysis-certifications/",
+          "cost": "Paid",
+          "cert": true
+        },
+        {
+          "title": "Service Standard",
+          "provider": "GOV.UK Service Manual",
+          "url": "https://www.gov.uk/service-manual/service-standard",
+          "cost": "Free",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "accessibility",
+      "courses": [
+        {
+          "title": "Digital Accessibility Foundations",
+          "provider": "W3C WAI",
+          "url": "https://www.w3.org/WAI/courses/foundations-course/",
+          "cost": "Free, certificate optional",
+          "cert": true
+        },
+        {
+          "title": "Accessibility requirements for public sector websites",
+          "provider": "GOV.UK",
+          "url": "https://www.gov.uk/guidance/accessibility-requirements-for-public-sector-websites-and-apps",
+          "cost": "Free",
+          "cert": false
+        },
+        {
+          "title": "Accessibility certifications",
+          "provider": "IAAP",
+          "url": "https://www.accessibilityassociation.org/",
+          "cost": "Paid",
+          "cert": true
+        }
+      ]
+    },
+    {
+      "topic": "user-research",
+      "courses": [
+        {
+          "title": "User research",
+          "provider": "GOV.UK Service Manual",
+          "url": "https://www.gov.uk/service-manual/user-research",
+          "cost": "Free",
+          "cert": false
+        },
+        {
+          "title": "Google UX Design Professional Certificate",
+          "provider": "Google on Coursera",
+          "url": "https://www.coursera.org/professional-certificates/google-ux-design",
+          "cost": "Paid",
+          "cert": true
+        },
+        {
+          "title": "UX Certification",
+          "provider": "Nielsen Norman Group",
+          "url": "https://www.nngroup.com/ux-certification/",
+          "cost": "Paid",
+          "cert": true
+        }
+      ]
+    },
+    {
+      "topic": "content-design",
+      "courses": [
+        {
+          "title": "Content design training",
+          "provider": "Content Design London",
+          "url": "https://contentdesign.london/",
+          "cost": "Paid",
+          "cert": true
+        },
+        {
+          "title": "Readability Guidelines",
+          "provider": "Content Design London",
+          "url": "https://readabilityguidelines.co.uk/",
+          "cost": "Free",
+          "cert": false
+        },
+        {
+          "title": "Content design: planning, writing and managing content",
+          "provider": "GOV.UK",
+          "url": "https://www.gov.uk/guidance/content-design",
+          "cost": "Free",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "service-design",
+      "courses": [
+        {
+          "title": "This is Service Design Doing: methods",
+          "provider": "This is Service Design Doing",
+          "url": "https://www.thisisservicedesigndoing.com/methods",
+          "cost": "Free",
+          "cert": false
+        },
+        {
+          "title": "Service Design Network",
+          "provider": "SDN",
+          "url": "https://www.service-design-network.org/",
+          "cost": "Free and paid",
+          "cert": true
+        },
+        {
+          "title": "Service Standard",
+          "provider": "GOV.UK Service Manual",
+          "url": "https://www.gov.uk/service-manual/service-standard",
+          "cost": "Free",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "interaction-design",
+      "courses": [
+        {
+          "title": "GOV.UK Design System",
+          "provider": "GDS",
+          "url": "https://design-system.service.gov.uk/",
+          "cost": "Free",
+          "cert": false
+        },
+        {
+          "title": "Interaction Design Foundation courses",
+          "provider": "IxDF",
+          "url": "https://www.interaction-design.org/courses",
+          "cost": "Paid",
+          "cert": true
+        },
+        {
+          "title": "Google UX Design Professional Certificate",
+          "provider": "Google on Coursera",
+          "url": "https://www.coursera.org/professional-certificates/google-ux-design",
+          "cost": "Paid",
+          "cert": true
+        }
+      ]
+    },
+    {
+      "topic": "security",
+      "courses": [
+        {
+          "title": "Web Security Academy",
+          "provider": "PortSwigger",
+          "url": "https://portswigger.net/web-security",
+          "cost": "Free",
+          "cert": false
+        },
+        {
+          "title": "Certified in Cybersecurity (CC)",
+          "provider": "ISC2",
+          "url": "https://www.isc2.org/certifications/cc",
+          "cost": "Free training offers, exam",
+          "cert": true
+        },
+        {
+          "title": "10 Steps to Cyber Security",
+          "provider": "NCSC",
+          "url": "https://www.ncsc.gov.uk/collection/10-steps",
+          "cost": "Free",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "cloud-infra",
+      "courses": [
+        {
+          "title": "AWS Certified Cloud Practitioner",
+          "provider": "AWS",
+          "url": "https://aws.amazon.com/certification/certified-cloud-practitioner/",
+          "cost": "Paid exam",
+          "cert": true
+        },
+        {
+          "title": "Azure Fundamentals (AZ-900)",
+          "provider": "Microsoft Learn",
+          "url": "https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/",
+          "cost": "Free training, paid exam",
+          "cert": true
+        },
+        {
+          "title": "Terraform tutorials",
+          "provider": "HashiCorp",
+          "url": "https://developer.hashicorp.com/terraform/tutorials",
+          "cost": "Free",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "software-engineering",
+      "courses": [
+        {
+          "title": "freeCodeCamp curriculum",
+          "provider": "freeCodeCamp",
+          "url": "https://www.freecodecamp.org/learn",
+          "cost": "Free",
+          "cert": true
+        },
+        {
+          "title": "Continuous Integration",
+          "provider": "martinfowler.com",
+          "url": "https://martinfowler.com/articles/continuousIntegration.html",
+          "cost": "Free",
+          "cert": false
+        },
+        {
+          "title": "The Twelve-Factor App",
+          "provider": "12factor.net",
+          "url": "https://12factor.net/",
+          "cost": "Free",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "architecture-strategy",
+      "courses": [
+        {
+          "title": "The TOGAF Standard",
+          "provider": "The Open Group",
+          "url": "https://www.opengroup.org/togaf",
+          "cost": "Free to read, paid certification",
+          "cert": true
+        },
+        {
+          "title": "Architecture decision records",
+          "provider": "adr.github.io",
+          "url": "https://adr.github.io/",
+          "cost": "Free",
+          "cert": false
+        },
+        {
+          "title": "Technology Code of Practice",
+          "provider": "GOV.UK",
+          "url": "https://www.gov.uk/guidance/the-technology-code-of-practice",
+          "cost": "Free",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "service-management",
+      "courses": [
+        {
+          "title": "ITIL 4 certifications",
+          "provider": "PeopleCert",
+          "url": "https://www.peoplecert.org/",
+          "cost": "Paid",
+          "cert": true
+        },
+        {
+          "title": "Service Desk Institute",
+          "provider": "SDI",
+          "url": "https://www.servicedeskinstitute.com/",
+          "cost": "Paid",
+          "cert": true
+        }
+      ]
+    },
+    {
+      "topic": "emerging-tech",
+      "courses": [
+        {
+          "title": "Elements of AI",
+          "provider": "University of Helsinki",
+          "url": "https://www.elementsofai.com/",
+          "cost": "Free",
+          "cert": true
+        },
+        {
+          "title": "DeepLearning.AI short courses",
+          "provider": "DeepLearning.AI",
+          "url": "https://www.deeplearning.ai/courses/",
+          "cost": "Free and paid",
+          "cert": true
+        },
+        {
+          "title": "AI Playbook for the UK Government",
+          "provider": "GOV.UK",
+          "url": "https://www.gov.uk/government/publications/ai-playbook-for-the-uk-government",
+          "cost": "Free",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "capability",
+      "courses": [
+        {
+          "title": "Kolb's experiential learning cycle",
+          "provider": "Simply Psychology",
+          "url": "https://www.simplypsychology.org/learning-kolb.html",
+          "cost": "Free",
+          "cert": false
+        },
+        {
+          "title": "Coaching and mentoring factsheet",
+          "provider": "CIPD",
+          "url": "https://www.cipd.org/uk/knowledge/factsheets/coaching-mentoring-factsheet/",
+          "cost": "Free",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "impact-evaluation",
+      "courses": [
+        {
+          "title": "The Magenta Book",
+          "provider": "HM Treasury",
+          "url": "https://www.gov.uk/government/publications/the-magenta-book",
+          "cost": "Free",
+          "cert": false
+        },
+        {
+          "title": "BetterEvaluation",
+          "provider": "BetterEvaluation",
+          "url": "https://www.betterevaluation.org/",
+          "cost": "Free",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "org-design",
+      "courses": [
+        {
+          "title": "Organisation design factsheet",
+          "provider": "CIPD",
+          "url": "https://www.cipd.org/uk/knowledge/factsheets/organisation-design-factsheet/",
+          "cost": "Free",
+          "cert": false
+        }
+      ]
+    },
+    {
+      "topic": "consulting",
+      "courses": [
+        {
+          "title": "Program on Negotiation",
+          "provider": "Harvard Law School",
+          "url": "https://www.pon.harvard.edu/",
+          "cost": "Free articles, paid courses",
+          "cert": true
+        },
+        {
+          "title": "International Association of Facilitators",
+          "provider": "IAF",
+          "url": "https://www.iaf-world.org/",
+          "cost": "Paid certification",
+          "cert": true
+        },
+        {
+          "title": "Kolb's experiential learning cycle",
+          "provider": "Simply Psychology",
+          "url": "https://www.simplypsychology.org/learning-kolb.html",
+          "cost": "Free",
+          "cert": false
+        }
+      ]
+    }
+  ]
+}

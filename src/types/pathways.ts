@@ -3,7 +3,7 @@
 export type ProficiencyLevel =
   "Learner" | "Contributor" | "Skilled" | "Expert" | "Leader" | "Driver";
 
-/** A grade a consultant can hold. Roles offer a subset; see `Role.grades`. */
+/** A grade a consultant can hold. Roles offer a subset, plus 12 (behaviours only) above 11. */
 export type Grade = "6" | "7" | "8" | "9" | "10" | "11" | "12";
 
 /** Behaviour bands group grades 6 and 7 together. */
@@ -66,6 +66,11 @@ export interface Framework {
   consultingPillars: ConsultingPillar[];
 }
 
+/** The framework in use: the built-in data, or a preview of uploaded spreadsheets. */
+export interface ActiveFramework extends Framework {
+  overridden: boolean;
+}
+
 export type ResourceFormat =
   "website" | "document" | "presentation" | "book" | "course" | "article";
 
@@ -79,7 +84,115 @@ export interface LearningResource {
   frameworkTags: string[];
 }
 
-// View models returned by the pathways service.
+// Subject knowledge: question bank and course catalogue (src/data/knowledge.json).
+
+export interface SubjectQuestion {
+  q: string;
+  options: string[];
+  correct: number;
+  explain: string;
+}
+
+export interface Topic {
+  id: string;
+  name: string;
+  questions: SubjectQuestion[];
+}
+
+export interface Course {
+  title: string;
+  provider: string;
+  url: string;
+  cost: string;
+  /** Whether the course awards a certificate. */
+  cert: boolean;
+}
+
+export interface KnowledgeCatalogue {
+  topics: Topic[];
+  courses: { topic: string; courses: Course[] }[];
+}
+
+// The consultant's own data, kept in this browser for now.
+
+/** Module keys are "s:", "b:" or "c:" plus the skill, behaviour or consulting module name. */
+export type ModuleKey = string;
+
+export interface QuizScores {
+  know?: number;
+  subj?: number;
+  at?: number;
+}
+
+export interface Plan {
+  intro: string;
+  actions: { title: string; detail: string; area: string }[];
+  at: number;
+}
+
+export interface Profile {
+  role: string | null;
+  grade: Grade | null;
+  read: Record<ModuleKey, boolean>;
+  quiz: Record<ModuleKey, QuizScores>;
+  shareWith: string[];
+  shareNames: Record<string, string>;
+  plan: Plan | null;
+  tracker: "tree" | "track";
+  /** The highest progress milestone already celebrated. */
+  milestone: number;
+  /** Best subject quiz score per topic, from 0 to 1. */
+  knowledge: Record<string, number>;
+  updatedAt?: number;
+}
+
+export interface SkillTag {
+  name: string;
+  level: ProficiencyLevel;
+  why: string;
+}
+
+export interface BehaviourTag {
+  name: string;
+  band: BehaviourBand;
+  why: string;
+}
+
+export interface EvidenceTags {
+  skills: SkillTag[];
+  behaviours: BehaviourTag[];
+  impacts: string[];
+  /** Consulting pillar names. */
+  consulting: string[];
+}
+
+export interface Evidence {
+  id: string;
+  title: string;
+  /** ISO date. */
+  date: string;
+  text: string;
+  summary: string;
+  files: string[];
+  tags: EvidenceTags;
+  createdAt: number;
+  source?: { file: string; sheet: string; row: number };
+}
+
+export interface Certificate {
+  id: string;
+  title: string;
+  provider: string;
+  date: string;
+  topic: string;
+  url: string;
+  fileName?: string;
+  fileType?: string;
+  /** Whether a file is stored for it. */
+  hasFile?: boolean;
+}
+
+// View models.
 
 export interface RoleOption {
   slug: string;
@@ -91,25 +204,25 @@ export interface RoleOption {
 
 export type ModuleKind = "skill" | "behaviour" | "consulting";
 
-export interface SkillModuleSummary {
-  kind: "skill";
+interface ModuleSummaryBase {
+  key: ModuleKey;
   slug: string;
   name: string;
+}
+
+export interface SkillModuleSummary extends ModuleSummaryBase {
+  kind: "skill";
   /** `null` when the framework doesn't expect this skill at the grade. */
   target: ProficiencyLevel | null;
 }
 
-export interface BehaviourModuleSummary {
+export interface BehaviourModuleSummary extends ModuleSummaryBase {
   kind: "behaviour";
-  slug: string;
-  name: string;
   target: BehaviourBand;
 }
 
-export interface ConsultingModuleSummary {
+export interface ConsultingModuleSummary extends ModuleSummaryBase {
   kind: "consulting";
-  slug: string;
-  name: string;
   pillar: string;
   stage: ConsultingStage;
   foundation: boolean;
@@ -129,8 +242,8 @@ export interface Pathway {
   craftSkills: SkillModuleSummary[];
   behaviours: BehaviourModuleSummary[];
   consulting: PathwayPillar[];
-  /** Every module slug in the pathway, used to measure progress. */
-  moduleSlugs: string[];
+  /** Every module in the pathway, in display order. */
+  modules: ModuleSummary[];
 }
 
 export interface LevelDescriptors {
@@ -142,6 +255,7 @@ export interface LevelDescriptors {
 }
 
 interface ModuleDetailBase {
+  key: ModuleKey;
   slug: string;
   name: string;
   definition: string;
@@ -151,7 +265,7 @@ interface ModuleDetailBase {
 export interface SkillModuleDetail extends ModuleDetailBase {
   kind: "skill";
   target: ProficiencyLevel | null;
-  /** The target level and the described levels either side of it. */
+  /** Every level the framework describes. */
   levels: LevelDescriptors[];
   /** True when the framework expects a level at this grade but doesn't describe it. */
   targetUndescribed: boolean;
