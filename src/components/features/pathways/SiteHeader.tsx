@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
+import { signOutAction } from "@/app/sign-in/actions";
 import { DEMO_PERSON } from "@/lib/pathways/demo";
 import { pathwayHref } from "@/lib/pathways/framework";
 
@@ -75,6 +76,11 @@ export function SiteHeader() {
           <span className="vh">Signed in as </span>
           {user.name}
         </span>
+        <form className="signout" action={signOutAction}>
+          <button className="btn ghost small" type="submit">
+            Sign out
+          </button>
+        </form>
         <ThemeToggle />
       </div>
     </header>

@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 import { DemoBar } from "@/components/features/pathways/DemoBar";
 import { PathwaysProvider } from "@/components/features/pathways/PathwaysProvider";
 import { SiteFooter } from "@/components/features/pathways/SiteFooter";
@@ -10,18 +12,7 @@ export default async function PathwaysLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   // Identity comes only from the auth seam (ADR 0002). Progress is stored per user.
   const user = await getCurrentUser();
-  if (!user) {
-    return (
-      <main id="main">
-        <section className="plain">
-          <div className="wrap">
-            <h1>Sign in to continue</h1>
-            <p>You need to be signed in to see your learning pathway.</p>
-          </div>
-        </section>
-      </main>
-    );
-  }
+  if (!user) redirect("/sign-in");
 
   const { framework, resources, knowledge } = frameworkSource;
   return (
