@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+@layer base {
+  /* A clear focus indicator on every interactive element (WCAG 2.2, 2.4.7 and 2.4.13). */
+  :focus-visible {
+    outline: 3px solid var(--color-indigo-700);
+    outline-offset: 2px;
+  }
+}
