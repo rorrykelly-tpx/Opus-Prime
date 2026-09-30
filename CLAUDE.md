@@ -33,7 +33,8 @@ sources.
 - **Linting/formatting:** ESLint (flat config) + Prettier
 - **Hosting:** Vercel (preview deploy per PR, production from `main`)
 - **Runtime:** Node 22 (see `.nvmrc`)
-- Database, auth and search provider are not chosen yet. Record the choice in
+- Auth: SSO is deferred; code goes through `@/server/auth` (ADR 0002).
+- Database and search provider are not chosen yet. Record the choice in
   `docs/decisions/` when you make it.
 
 ## Project Structure
@@ -46,6 +47,7 @@ src/
     features/          Feature-specific components (e.g. search, library)
   lib/                 Shared client/server-safe utilities, env parsing
   server/              Server-only code; never import from client components
+    auth/              Current-user lookup behind a swappable provider (SSO later)
     services/          Business logic (ingestion, search, catalogue)
     db/                Database client and queries
   types/               Shared TypeScript types
